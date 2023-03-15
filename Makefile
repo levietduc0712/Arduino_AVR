@@ -71,8 +71,8 @@ build:
 	$(AR) rcs $(OUTPUT)core.a $(OUTPUT)main.cpp.o
 	$(AR) rcs $(OUTPUT)core.a $(OUTPUT)new.cpp.o
 	Linking everything together
-	$(CC) -w -Os -g -flto -fuse-linker-plugin -Wl,--gc-sections -mmcu=$(MCU) -o Blink.elf Blink.cpp.o $(OUTPUT)core.a "-LC:AVR_ARDUINO/output" -lm
-	$(OBJCOPY) -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 Blink.elf Blink.eep
-	$(OBJCOPY) -O ihex -R .eeprom Blink.ino.elf Blink.hex
-	$(AR_SIZE) -A Blink.elf
+	$(CC) -w -Os -g -flto -fuse-linker-plugin -Wl,--gc-sections -mmcu=$(MCU) -o $(MAIN_SKETCH).elf $(MAIN_SKETCH).o $(OUTPUT)core.a "-LC:AVR_ARDUINO/output" -lm
+	$(OBJCOPY) -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 Blink.elf $(MAIN_SKETCH).eep
+	$(OBJCOPY) -O ihex -R .eeprom $(MAIN_SKETCH).elf $(MAIN_SKETCH).hex
+	$(AR_SIZE) -A $(MAIN_SKETCH).elf
 
