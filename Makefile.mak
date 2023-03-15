@@ -75,3 +75,4 @@ build:
 	$(OBJCOPY) -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 Blink.elf Blink.eep
 	$(OBJCOPY) -O ihex -R .eeprom Blink.ino.elf Blink.hex
 	$(AR_SIZE) -A Blink.elf
+
